@@ -4,16 +4,27 @@
 <style>
 canvas, video {
 	width: 200px;
-	height: 200px
+	height: 200px;
+	border: 1px solid #000;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 0px;
+	margin-left: 10px;
 }
 #divLeft {
 	float: left
 }
 #divRight {
-	width: 500px;
-	height: 100px;
-	margin-left: 100px;
+	width: 600px;
+	height: 900px;
+	margin: 10px;
 	float: left
+}
+#canvas_Big
+{
+	width:600px;
+	height:800px;
+	border: 1px solid #000;	
 }
 </style>
 <head>
@@ -22,40 +33,100 @@ canvas, video {
 </head>
 <body>
 <div id="divLeft"> 
-  <canvas id="canvas_A" > 你的浏览器不支持HTML5 </canvas>
+  <canvas id="canvas_1" width="200" height="200"> 你的浏览器不支持HTML5 </canvas>
   <br />
-  <video src="HarvardjisuanjikexueCS50Lecture01.mp4" controls="controls" ondblclick="ShowImage(this.getAttribute('id'))"> adada </video>
+  <canvas id="canvas_2" width="200" height="200" > 你的浏览器不支持HTML5 </canvas>
+  <br />
+  <canvas id="canvas_3"  width="200" height="200"> 你的浏览器不支持HTML5 </canvas>
+  <br />
+  <video src="HarvardjisuanjikexueCS50Lecture01.mp4" controls="controls" 
+  	onlclick="ShowVideo()">
+   	你的浏览器不支持HTML5
+   </video>
 </div>
-<div id="divRight"/>
+<div id="divRight">
+	<canvas id="canvas_Big" width="600" height="600"></canvas>
+</div>
 <script>
-var img=new Image();
-	img.src="http://192.168.1.104/SLMedallion_CHS.png";
-	c=document.getElementById("canvas_A");
-	ctx=c.getContext("2d");
-	img.onload=function()
+function initImage(i)
+{
+	//var img=new Image();
+	//img.src="small_"+i+".bmp";;
+	//var c=document.getElementById("canvas_"+i);
+	//var ctx=c.getContext("2d");
+	//img.onload=function()
+	//{
+	//	ctx.drawImage(img,0,0,200,200);
+	//}
+	//delete ctx;	
+	//delete img;	
+	//} 
+	var img1=new Image();
+	img1.src="http://192.168.1.104/small_1.bmp";
+	var c1=document.getElementById("canvas_1");
+	var ctx1=c1.getContext("2d");
+	img1.onload=function()
 	{
-		ctx.drawImage(img,0,0,200,200);
+		
+		ctx1.drawImage(img1,0,0,200,200);
 	}
 	
+	var img2=new Image();
+	img2.src="http://192.168.1.104/small_2.bmp";
+	var c2=document.getElementById("canvas_2");
+	var ctx2=c2.getContext("2d");
+	img2.onload=function()
+	{
+		
+		ctx2.drawImage(img2,0,0,200,200);
+	}
+	
+	var img3=new Image();
+	img3.src="http://192.168.1.104/small_3.bmp";
+	var c3=document.getElementById("canvas_3");
+	var ctx3=c3.getContext("2d");
+	img3.onload=function()
+	{
+		
+		ctx3.drawImage(img3,0,0,200,200);
+	}
+	
+	
+}
+
 window.onload=function()
 {
+	
 	var arr=document.getElementsByTagName('canvas');
 	for(var i=0;i<arr.length;i++)
 	{		
-		arr[i].ondblclick=function(){
-		ShowImage(this.getAttribute('id'))
+		arr[i].onclick=function(){
+		ShowImage(this.getAttribute('id'));		
 		}
 	}
+	initImage(5);
 	
-	//canvas_A显示
 	
 }
 function ShowImage(id)
-{
+{	
+		var c=document.getElementById("canvas_Big");
+		var ctx=c.getContext("2d");
+		
+		var index=id.substr(7,1);
+		var img=new Image();
+		
+		img.src="http://192.168.1.104/big_"+index+".bmp";
+		img.onload=function()
+		{
+			ctx.drawImage(img,0,0,600,600);
+		}
+		delete img;
+	
+}
 
-	
-	
-		document.getElementById("divRight").style.background="url(http://192.168.1.104/logo_gl.png)";
+function ShowVideo()
+	{
 	}
 </script>
 
