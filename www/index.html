@@ -1,68 +1,75 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<style>
-canvas, video {
-	width: 200px;
-	height: 200px;
-	border: 1px solid #000;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 0px;
-	margin-left: 10px;
-}
-#divLeft {
-	float: left
-}
-#divRight {
-	width: 600px;
-	height: 900px;
-	margin: 10px;
-	float: left
-}
-#canvas_Big
-{
-	width:600px;
-	height:800px;
-	border: 1px solid #000;	
-}
-</style>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>图像显示</title>
-</head>
+<!DOCTYPE html >
+<html>
+<header>
+	<meta charset="utf-8"/>
+    <title>HTML5阅片系统</title>
+</header>
+<link rel="stylesheet" type="text/css" href="main.css"/>
 <body>
-<div id="divLeft"> 
-  <canvas id="canvas_1" width="200" height="200"> 你的浏览器不支持HTML5 </canvas>
-  <br />
-  <canvas id="canvas_2" width="200" height="200" > 你的浏览器不支持HTML5 </canvas>
-  <br />
-  <canvas id="canvas_3"  width="200" height="200"> 你的浏览器不支持HTML5 </canvas>
-  <br />
-  <video src="HarvardjisuanjikexueCS50Lecture01.mp4" controls="controls" 
-  	onlclick="ShowVideo()">
-   	你的浏览器不支持HTML5
-   </video>
-</div>
-<div id="divRight">
-	<canvas id="canvas_Big" width="600" height="600"></canvas>
+<div id="big_wrapper">
+	<!--<nav id="top_menu">
+    	<ul>
+        	<li>本地查询</li>
+            <li>查看图像</li>
+        </ul>	
+        
+     </nav>-->
+     <div class="buttonList">
+         <div class="divSep">
+            <input id="pointer" type="button"  onclick=	"revert()"/>
+            <input id="zoom" type="button"  onclick="revert()"/>
+            <input id="move" type="button"  onclick="revert()"/>
+        </div>
+        <div class="divSep">
+            <input id="slayout" type="button"  onclick="revert()"/>
+            <input id="ilayout" type="button" onclick="revert()"/>
+        </div>
+        <div class="divSep">
+            <input id="WWWL" type="button" onclick="revert()"/>
+            <input id="invert" type="button" onclick="revert()"/>    
+            <input id="info" type="button" onclick="revert()" ></input>
+        </div>
+            
+        <div class="divSep">
+            <input id="left" type="button" onclick="revert()"/>
+            <input id="right" type="button" onclick="revert()"/>
+            <input id="Hflip" type="button" onclick="revert()" />
+            <input id="Vflip" type="button" onclick="revert()" >
+        </div>
+        <div class="divSep">
+            <input id="reset" type="button" onclick="revert()"/>
+            <input id="save" type="button" onclick="revert()"/>    
+            <input id="stack" type="button" onclick="revert()" />
+        </div>
+        <div class="divSep">
+            <input id="line" type="button" onclick="revert()"/>
+            <input id="angel" type="button" onclick="revert()"/>    
+            <input id="HU" type="button" onclick="revert()" />
+        </div>
+    </div>
+    <div id="new_div">
+     	<aside id="side_nav"> 
+      		<canvas id="canvas_1" width="200" height="200" onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
+      		<br />
+      		<canvas id="canvas_2" width="200" height="200" onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
+      		<br />
+      		<canvas id="canvas_3"  width="200" height="200" onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
+      		<canvas id="canvas_4"  width="200" height="200" onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
+      		<br />
+        </aside>
+     	<section id="main_section">
+        	<canvas id="canvas_Big"  onclick="Select()"></canvas>
+        </section>
+     </div>
+       <footer id="foot">
+       		Copyright Mindray2013!
+       </footer>
 </div>
 <script>
-function initImage(i)
+function initImage()
 {
-	//var img=new Image();
-	//img.src="small_"+i+".bmp";;
-	//var c=document.getElementById("canvas_"+i);
-	//var ctx=c.getContext("2d");
-	//img.onload=function()
-	//{
-	//	ctx.drawImage(img,0,0,200,200);
-	//}
-	//delete ctx;	
-	//delete img;	
-	//} 
 	var img1=new Image();
-	img1.src="http://192.168.1.104/small_1.bmp";
+	img1.src="small_1.bmp";
 	var c1=document.getElementById("canvas_1");
 	var ctx1=c1.getContext("2d");
 	img1.onload=function()
@@ -72,7 +79,7 @@ function initImage(i)
 	}
 	
 	var img2=new Image();
-	img2.src="http://192.168.1.104/small_2.bmp";
+	img2.src="small_2.bmp";
 	var c2=document.getElementById("canvas_2");
 	var ctx2=c2.getContext("2d");
 	img2.onload=function()
@@ -82,7 +89,7 @@ function initImage(i)
 	}
 	
 	var img3=new Image();
-	img3.src="http://192.168.1.104/small_3.bmp";
+	img3.src="small_3.bmp";
 	var c3=document.getElementById("canvas_3");
 	var ctx3=c3.getContext("2d");
 	img3.onload=function()
@@ -91,44 +98,129 @@ function initImage(i)
 		ctx3.drawImage(img3,0,0,200,200);
 	}
 	
-	
+	var img4=new Image();
+	img4.src="small_4.bmp";
+	var c4=document.getElementById("canvas_4");
+	var ctx4=c4.getContext("2d");
+	img4.onload=function()
+	{
+		
+		ctx4.drawImage(img4,0,0,200,200);
+	}
+}
+var canvas_Big=null;
+var context_Big=null;
+var bH = 0;
+var bW = 0;   
+
+function initSize()
+{	            
+	if (document.compatMode == "BackCompat") {//兼容模式关闭
+		bW = document.body.clientWidth;
+		bH = document.body.clientHeight;
+	}
+	else { //document.compatMode == "CSS1Compat" 兼容模式开启
+		bH = document.documentElement.clientHeight;
+		bW = document.documentElement.clientWidth; //减去滚动条宽高
+	}
+	document.getElementById("side_nav").style.height=bH-100+"px";
+	document.getElementById("main_section").style.height=bH-107+"px";
+}
+window.onload=function()
+{		
+	initSize();
+	initImage();
+	canvas_Big=document.getElementById("canvas_Big");
+	context_Big=canvas_Big.getContext("2d");
+	if(bW>1024)
+	{
+		bW=1024;
+	}	
+	ShowImage("canvas_1");	
 }
 
-window.onload=function()
-{
-	
-	var arr=document.getElementsByTagName('canvas');
-	for(var i=0;i<arr.length;i++)
-	{		
-		arr[i].onclick=function(){
-		ShowImage(this.getAttribute('id'));		
-		}
-	}
-	initImage(5);
-	
-	
-}
+
 function ShowImage(id)
 {	
-		var c=document.getElementById("canvas_Big");
-		var ctx=c.getContext("2d");
-		
-		var index=id.substr(7,1);
-		var img=new Image();
-		
-		img.src="http://192.168.1.104/big_"+index+".bmp";
-		img.onload=function()
+	var index=id.substr(7,1);
+	var img=new Image();
+	
+	img.src="big_"+index+".bmp";
+	
+	img.onload=function()
+	{
+		if((bH-107)/img.height>=1 &&(bW-236)/img.width>=1)
 		{
-			ctx.drawImage(img,0,0,600,600);
+			document.getElementById("canvas_Big").width=bW-236;
+			document.getElementById("canvas_Big").height=bH-107;
+			context_Big.drawImage(img,Math.floor((bW-236-img.width)/2),Math.floor((bH-107-img.height)/2));
 		}
-		delete img;
+		 else if((bH-107)/img.height>=1 &&(bW-236)/img.width<1)
+		{
+			var zoom=Math.floor((bW-236)/img.width*100)/100;
+			document.getElementById("canvas_Big").width=img.width*zoom;
+			document.getElementById("canvas_Big").height=bH-107;
+			context_Big.drawImage(img,0,(bH-107-img.height)/2,img.width*zoom,img.height*zoom);
+		}
+		else if((bH-107)/img.height<1 &&(bW-236)/img.width>=1)
+		{
+			var zoom=Math.floor((bH-107)/img.height*100)/100;
+			document.getElementById("canvas_Big").width=bW-236;
+			document.getElementById("canvas_Big").height=img.height*zoom;
+			context_Big.drawImage(img,((bW-236)-img.width)/2,0,img.width*zoom,img.height*zoom);
+		}
+		else if((bH-107)/img.height<1 &&(bW-236)/img.width<1)
+		{
+			if((bH-107)/img.height<=(bW-236)/img.width)
+			{
+				var zoom=Math.floor((bH-107)/img.height*100)/100;
+			
+			}
+			else
+			{
+				var zoom=Math.floor((bW-236)/img.width*100)/100;
+			}
+				document.getElementById("canvas_Big").width=bW-236;
+				document.getElementById("canvas_Big").height=bH-107;
+			context_Big.drawImage(img,Math.floor((bW-236-img.width*zoom)/2),Math.floor((bH-107-img.height*zoom)/2),Math.floor(img.width*zoom),Math.floor(img.height*zoom));
+		}
+		context_Big.save();
+	}
+	delete img;	
 	
 }
 
-function ShowVideo()
-	{
-	}
-</script>
+//图像反色
+function revert()
+{
+	var w=document.getElementById("canvas_Big").width;
+	var h=document.getElementById("canvas_Big").height;
+	var imagedata=context_Big.getImageData(0,0,w,h);
+			var imagedata1=context_Big.createImageData(w,h);
+			for (var j=0;j<h;j++)
+			{
+				for (var i=0;i<w;i++)
+				{
+					k=4*(w*j+i);
+					imagedata1.data[k+0]=255-imagedata.data[k+0];
+					imagedata1.data[k+1]=255-imagedata.data[k+1];
+					imagedata1.data[k+2]=255-imagedata.data[k+2];
+					imagedata1.data[k+3]=255;					
+				}			
+			}
+	context_Big.putImageData(imagedata1,0,0);
+}
+function Select()
+{
+	ifSelect=true;
+}
 
+function resetPic()
+{
+	context_Big.restore();
+}
+</script>
 </body>
 </html>
+            
+	
