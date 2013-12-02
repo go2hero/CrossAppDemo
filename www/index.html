@@ -69,7 +69,7 @@
 function initImage()
 {
 	var img1=new Image();
-	img1.src="small_1.bmp";
+	img1.src="img/small_1.bmp";
 	var c1=document.getElementById("canvas_1");
 	var ctx1=c1.getContext("2d");
 	img1.onload=function()
@@ -79,7 +79,7 @@ function initImage()
 	}
 	
 	var img2=new Image();
-	img2.src="small_2.bmp";
+	img2.src="img/small_2.bmp";
 	var c2=document.getElementById("canvas_2");
 	var ctx2=c2.getContext("2d");
 	img2.onload=function()
@@ -89,7 +89,7 @@ function initImage()
 	}
 	
 	var img3=new Image();
-	img3.src="small_3.bmp";
+	img3.src="img/small_3.bmp";
 	var c3=document.getElementById("canvas_3");
 	var ctx3=c3.getContext("2d");
 	img3.onload=function()
@@ -99,7 +99,7 @@ function initImage()
 	}
 	
 	var img4=new Image();
-	img4.src="small_4.bmp";
+	img4.src="img/small_4.bmp";
 	var c4=document.getElementById("canvas_4");
 	var ctx4=c4.getContext("2d");
 	img4.onload=function()
@@ -145,7 +145,7 @@ function ShowImage(id)
 	var index=id.substr(7,1);
 	var img=new Image();
 	
-	img.src="big_"+index+".bmp";
+	img.src="img/big_"+index+".bmp";
 	
 	img.onload=function()
 	{
