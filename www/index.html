@@ -6,6 +6,9 @@
 </header>
 <link rel="stylesheet" type="text/css" href="main.css"/>
 <body>
+<script>
+var small_width = document.body.clientWidth/5;
+</script>
 <div id="big_wrapper">
 	<!--<nav id="top_menu">
     	<ul>
@@ -27,12 +30,12 @@
     </div>
     <div id="new_div">
      	<aside id="side_nav"> 
-      		<canvas id="canvas_1" width="200" height="200" onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
+      		<canvas id="canvas_1" width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
       		<br />
-      		<canvas id="canvas_2" width="200" height="200" onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
+      		<canvas id="canvas_2" width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
       		<br />
-      		<canvas id="canvas_3"  width="200" height="200" onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
-      		<canvas id="canvas_4"  width="200" height="200" onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
+      		<canvas id="canvas_3"  width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
+      		<canvas id="canvas_4"  width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
       		<br />
         </aside>
      	<section id="main_section">
@@ -53,7 +56,7 @@ function initImage()
 	img1.onload=function()
 	{
 		
-		ctx1.drawImage(img1,0,0,200,200);
+		ctx1.drawImage(img1,0,0,small_width,small_width);
 	}
 	
 	var img2=new Image();
@@ -63,7 +66,7 @@ function initImage()
 	img2.onload=function()
 	{
 		
-		ctx2.drawImage(img2,0,0,200,200);
+		ctx2.drawImage(img2,0,0,small_width,small_width);
 	}
 	
 	var img3=new Image();
@@ -73,7 +76,7 @@ function initImage()
 	img3.onload=function()
 	{
 		
-		ctx3.drawImage(img3,0,0,200,200);
+		ctx3.drawImage(img3,0,0,small_width,small_width);
 	}
 	
 	var img4=new Image();
@@ -83,7 +86,7 @@ function initImage()
 	img4.onload=function()
 	{
 		
-		ctx4.drawImage(img4,0,0,200,200);
+		ctx4.drawImage(img4,0,0,small_width,small_width);
 	}
 }
 var canvas_Big=null;
