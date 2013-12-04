@@ -6,9 +6,6 @@
 </header>
 <link rel="stylesheet" type="text/css" href="main.css"/>
 <body>
-<script>
-var small_width = document.body.clientWidth/5;
-</script>
 <div id="big_wrapper">
 	<!--<nav id="top_menu">
     	<ul>
@@ -30,7 +27,7 @@ var small_width = document.body.clientWidth/5;
     </div>
     <div id="new_div">
      	<aside id="side_nav"> 
-      		<canvas id="canvas_1" width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
+      		<canvas id="canvas_1" width="200" height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
       		<br />
       		<canvas id="canvas_2" width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
       		<br />
@@ -47,6 +44,8 @@ var small_width = document.body.clientWidth/5;
        </footer>
 </div>
 <script>
+var small_width = document.body.clientWidth/5;
+
 function initImage()
 {
 	var img1=new Image();
@@ -55,7 +54,7 @@ function initImage()
 	var ctx1=c1.getContext("2d");
 	img1.onload=function()
 	{
-		
+		var tmpzoom = img1.width/small_width;
 		ctx1.drawImage(img1,0,0,small_width,small_width);
 	}
 	
@@ -104,8 +103,11 @@ function initSize()
 		bH = document.documentElement.clientHeight;
 		bW = document.documentElement.clientWidth; //减去滚动条宽高
 	}
+	
+	document.getElementById("side_nav").style.width = small_width+"px";
 	document.getElementById("side_nav").style.height=bH-100+"px";
 	document.getElementById("main_section").style.height=bH-107+"px";
+
 }
 window.onload=function()
 {		
