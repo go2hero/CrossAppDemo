@@ -24,16 +24,14 @@
 		width:100%;
 		overflow:hidden;
 		display:-webkit-box;
-		-webkit-box-pack:center;
-		-moz-box-pack:center;
 		background-color:#595a59;
-		
 		scrollbar-face-color:#595959;
 	}
 	#big_wrapper
 	{
 		max-width:1024px;
 		margin:5px 0px;
+		display:-moz-box;
 		display:-webkit-box;
 		-webkit-box-orient:vertical;
 		-webkit-box-flex:1;
@@ -64,38 +62,36 @@
 	#new_div
 	{
 		display:-webkit-box;
+		display:-moz-box;
 		-webkit-box-orient:horizontal;
 		-moz-box-orient:horizontal;
+		overflow:hidden;
 	}
 	#side_nav
 	{
-		/*width:210px;*/
 		margin:1px;
-		height:50%;
 		background:#313031;
 		overflow-y:scroll;
 		overflow-x:hidden;
 		display:-webkit-box;
+		display:-moz-box;
 		-webkit-box-pack:center;
 		-moz-box-pack:center;
-		
+		-webkit-box-ordinal-group:1;
+		-moz-box-ordinal-group:1;
 	}
 	#main_section
 	{
 		margin:5px;
 		border:2px solid #FFFF00;
-		-webkit-box-flex:1;
-		-moz-box-flex:1;
-		display:-webkit-box;
-		-webkit-box-pack:center;
-		-moz-box-pack:center;
+		
 	}
 	#foot
 	{
-	text-align: center;
-	padding: 10px;
-	border-top: 2px solid #525152;
-	color: white;
+		text-align: center;
+		padding: 10px;
+		border-top: 2px solid #525152;
+		color: white;
 	}
 	input[type="button"]
 	{
@@ -105,77 +101,78 @@
 		border:none;
 		margin:0px;
 	}
+
 	#pointer
 	{
-		background:url(img/pointer.png) no-repeat;
+		background:url(./img/pointer.png) no-repeat;
 	}
 	#zoom
 	{
-		background:url(img/zoom.png) no-repeat;
+		background:url(./img/zoom.png) no-repeat;
 	}
 	#move
 	{
-		background:url(img/move.png) no-repeat;
+		background:url(./img/move.png) no-repeat;
 	}
 	#ilayout
 	{
-		background:url(img/ilayout.png) no-repeat;
+		background:url(./img/ilayout.png) no-repeat;
 	}
 	#slayout
 	{
-		background:url(img/slayout.png) no-repeat;
+		background:url(./img/slayout.png) no-repeat;
 	}
 	#WWWL
 	{
-		background:url(img/WWWL.png) no-repeat;
+		background:url(./img/WWWL.png) no-repeat;
 	}
 	#invert
 	{
-		background:url(img/invert.png) no-repeat;
+		background:url(./img/invert.png) no-repeat;
 	}
 	#info
 	{
-		background:url(img/info.png) no-repeat;
+		background:url(./img/info.png) no-repeat;
 	}
 	#left
 	{
-		background:url(img/90left.png) no-repeat;
+		background:url(./img/90left.png) no-repeat;
 	}
 	#right
 	{
-		background:url(img/90right.png) no-repeat;
+		background:url(./img/90right.png) no-repeat;
 	}
 	#Hflip
 	{
-		background:url(img/Hflip.png) no-repeat;
+		background:url(./img/Hflip.png) no-repeat;
 	}
 	#Vflip
 	{
-		background:url(img/Vflip.png) no-repeat;
+		background:url(./img/Vflip.png) no-repeat;
 	}
 	#reset
 	{
-		background:url(img/reset.png) no-repeat;
+		background:url(./img/reset.png) no-repeat;
 	}
 	#save
 	{
-		background:url(img/save.png) no-repeat;
+		background:url(./img/save.png) no-repeat;
 	}
 	#stack
 	{
-		background:url(img/stack.png) no-repeat;
+		background:url(./img/stack.png) no-repeat;
 	}
 	#line
 	{
-		background:url(img/line.png) no-repeat;
+		background:url(./img/line.png) no-repeat;
 	}
 	#angel
 	{
-		background:url(img/angel.png) no-repeat;
+		background:url(./img/angel.png) no-repeat;
 	}
 	#HU
 	{
-		background:url(img/HU.png) no-repeat;
+		background:url(./img/HU.png) no-repeat;
 	}
 	.divSep
 	{
@@ -201,5 +198,16 @@
 		-webkit-border-radius:5px;
 		-moz-border-radius:5px;
 		border-radius:5px;
-	}	
+	}
+	
+	canvas
+	{
+		-webkit-transition:background-color 0.5s linear;
+		-moz-transition:background-color 0.5s linear;
+		-o-transition:background-color 0.5s linear;
+	}
+	canvas:hover
+	{
+		background-color:#9FF;
+	}
 	</style>
