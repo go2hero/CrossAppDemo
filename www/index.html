@@ -1,212 +1,121 @@
-<!DOCTYPE html >
-<html>
-<header>
-	<meta charset="utf-8"/>
-    <title>HTML5阅片系统</title>
-</header>
-<link rel="stylesheet" type="text/css" href="main.css"/>
+<!DOCTYPE html>
+<html manifest="cache.manifest">
+
+<head>
+<title>DICOM Web Viewer</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/style.css">
+<style>
+body { background-color: #222; color: white;
+  margin: 10px; padding: 0; font-size: 80%; }
+#pageHeader h1 { display: inline-block; margin: 0; color: #fff; }
+#pageHeader a { color: #ddf; }
+#pageHeader #toolbar { display: inline-block; float: right; }
+#toolbox li:first-child { list-style-type: none; padding-bottom: 10px; margin-left: -20px; }
+#pageMain { position: absolute; height: 92%; width: 99%; bottom: 5px; left: 5px; background-color: #333; }
+#infotl { color: #333; text-shadow: 0 1px 0 #fff; }
+#infotr { color: #333; text-shadow: 0 1px 0 #fff; }
+</style>
+<link rel="stylesheet" href="ext/jquery-ui/themes/ui-darkness/jquery-ui-1.10.3.min.css">
+<!-- Third party -->  
+<script type="text/javascript" src="ext/jquery/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="ext/jquery-ui/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript" src="ext/flot/jquery.flot.min.js"></script>
+<script type="text/javascript" src="ext/openjpeg/openjpeg.js"></script>
+<!-- Local -->
+<script type="text/javascript" src="src/application.js"></script>
+<script type="text/javascript" src="src/dicom/dicomParser.js"></script>
+<script type="text/javascript" src="src/dicom/dictionary.js"></script>
+<script type="text/javascript" src="src/html/gui.js"></script>
+<script type="text/javascript" src="src/html/html.js"></script>
+<script type="text/javascript" src="src/html/layer.js"></script>
+<script type="text/javascript" src="src/html/style.js"></script>
+<script type="text/javascript" src="src/image/filter.js"></script>
+<script type="text/javascript" src="src/image/image.js"></script>
+<script type="text/javascript" src="src/image/luts.js"></script>
+<script type="text/javascript" src="src/image/reader.js"></script>
+<script type="text/javascript" src="src/image/view.js"></script>
+<script type="text/javascript" src="src/io/file.js"></script>
+<script type="text/javascript" src="src/io/url.js"></script>
+<script type="text/javascript" src="src/math/bucketQueue.js"></script>
+<script type="text/javascript" src="src/math/scissors.js"></script>
+<script type="text/javascript" src="src/math/shapes.js"></script>
+<script type="text/javascript" src="src/tools/circle.js"></script>
+<script type="text/javascript" src="src/tools/draw.js"></script>
+<script type="text/javascript" src="src/tools/filter.js"></script>
+<script type="text/javascript" src="src/tools/info.js"></script>
+<script type="text/javascript" src="src/tools/line.js"></script>
+<script type="text/javascript" src="src/tools/livewire.js"></script>
+<script type="text/javascript" src="src/tools/rectangle.js"></script>
+<script type="text/javascript" src="src/tools/roi.js"></script>
+<script type="text/javascript" src="src/tools/toolbox.js"></script>
+<script type="text/javascript" src="src/tools/undo.js"></script>
+<script type="text/javascript" src="src/tools/windowLevel.js"></script>
+<script type="text/javascript" src="src/tools/zoom.js"></script>
+<script type="text/javascript" src="src/utils/string.js"></script>
+
+<!--  Launch the app -->
+<script type="text/javascript" src="src/applauncher-s.js"></script>
+</head>
+
 <body>
-<div id="big_wrapper">
-	<!--<nav id="top_menu">
-    	<ul>
-        	<li>本地查询</li>
-            <li>查看图像</li>
-        </ul>	
-        
-     </nav>-->
-     <div class="buttonList">
-         <div class="divSep">
-            <input id="pointer" type="button"  onclick=	"revert()"/>
-            <input id="zoom" type="button"  onclick="revert()"/>
-            <input id="move" type="button"  onclick="revert()"/>
-        </div>
-        <div class="divSep">
-            <input id="slayout" type="button"  onclick="revert()"/>
-            <input id="ilayout" type="button" onclick="revert()"/>
-        </div>
-    </div>
-    <div id="new_div">
-     	<aside id="side_nav"> 
-      		<canvas id="canvas_1" width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
-      		<br />
-      		<canvas id="canvas_2" width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
-      		<br />
-      		<canvas id="canvas_3"  width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
-      		<canvas id="canvas_4"  width=small_width height=small_width onclick="ShowImage(this.getAttribute('id'))"> 你的浏览器不支持HTML5 </canvas>
-      		<br />
-        </aside>
-     	<section id="main_section">
-        	<canvas id="canvas_Big"  onclick="Select()"></canvas>
-        </section>
-     </div>
-       <footer id="foot">
-       		Copyright Mindray2013!
-       </footer>
+
+<div id="pageHeader">
+
+<!-- Title #dwvversion -->
+<h1>DICOM Web Viewer (<a href="https://github.com/ivmartel/dwv">dwv</a> v0.5.0beta)</h1>
+
+<!-- Toolbar -->
+<div id="toolbar">
+<button id="open-btn">File</button>
+<button id="toolbox-btn">Toolbox</button>
+<button id="history-btn">History</button>
+<button id="tags-btn">Tags</button>
+<button id="layerDialog-btn">Image</button>
+<button id="info-btn">Info</button>
+<button id="help-btn">Help</button>
+</div><!-- /toolbar -->
+
+</div><!-- /pageHeader -->
+
+<div id="pageMain">
+
+<!-- Open file -->
+<div id="openData" title="File">
+<div id="loaderlist"></div>
+<div id="progressbar"></div>
 </div>
-<script>
-var small_width = document.body.clientWidth/5;
 
-function initImage()
-{
-	var img1=new Image();
-	img1.src="img/small_1.bmp";
-	var c1=document.getElementById("canvas_1");
-	var ctx1=c1.getContext("2d");
-	img1.onload=function()
-	{
-		var tmpzoom = img1.width/small_width;
-		ctx1.drawImage(img1,0,0,small_width,small_width);
-	}
-	
-	var img2=new Image();
-	img2.src="img/small_2.bmp";
-	var c2=document.getElementById("canvas_2");
-	var ctx2=c2.getContext("2d");
-	img2.onload=function()
-	{
-		
-		ctx2.drawImage(img2,0,0,small_width,small_width);
-	}
-	
-	var img3=new Image();
-	img3.src="img/small_3.bmp";
-	var c3=document.getElementById("canvas_3");
-	var ctx3=c3.getContext("2d");
-	img3.onload=function()
-	{
-		
-		ctx3.drawImage(img3,0,0,small_width,small_width);
-	}
-	
-	var img4=new Image();
-	img4.src="img/small_4.bmp";
-	var c4=document.getElementById("canvas_4");
-	var ctx4=c4.getContext("2d");
-	img4.onload=function()
-	{
-		
-		ctx4.drawImage(img4,0,0,small_width,small_width);
-	}
-}
-var canvas_Big=null;
-var context_Big=null;
-var bH = 0;
-var bW = 0;   
+<!-- Toolbox -->
+<div id="toolbox" title="Toolbox">
+<ul id="toolList"></ul>
+</div>
 
-function initSize()
-{	            
-	if (document.compatMode == "BackCompat") {//兼容模式关闭
-		bW = document.body.clientWidth;
-		bH = document.body.clientHeight;
-	}
-	else { //document.compatMode == "CSS1Compat" 兼容模式开启
-		bH = document.documentElement.clientHeight;
-		bW = document.documentElement.clientWidth; //减去滚动条宽高
-	}
+<!-- History -->
+<div id="history" title="History"></div>
 
-	document.getElementById("side_nav").style.width = small_width+"px";
-	document.getElementById("side_nav").style.height=bH+"px";
-	document.getElementById("main_section").style.height=bH+"px";
-	
-    alert(document.getElementById("side_nav").style.width);
-    alert(document.getElementById("main_section").style.height);
+<!-- Tags -->
+<div id="tags" title="Tags"></div>
 
-}
-window.onload=function()
-{		
-	initSize();
-	initImage();
-	canvas_Big=document.getElementById("canvas_Big");
-	context_Big=canvas_Big.getContext("2d");
-	if(bW>1024)
-	{
-		bW=1024;
-	}	
-	ShowImage("canvas_1");	
-}
+<!-- Help -->
+<div id="help" title="Help"></div>
 
+<!-- Layer Container -->
+<div id="layerDialog" title="Image">
+<div id="layerContainer">
+<canvas id="imageLayer">Only for HTML5 compatible browsers...</canvas>
+<canvas id="drawLayer">Only for HTML5 compatible browsers...</canvas>
+<canvas id="tempLayer">Only for HTML5 compatible browsers...</canvas>
+<div id="infoLayer">
+<div id="infotl"></div>
+<div id="infotr"></div>
+<div id="infobl"></div>
+<div id="infobr"><div id="plot"></div></div>
+</div><!-- /infoLayer -->
+</div><!-- /layerContainer -->
+</div><!-- /layerDialog -->
 
-function ShowImage(id)
-{	
-	var index=id.substr(7,1);
-	var img=new Image();
-	
-	img.src="img/big_"+index+".bmp";
-	
-	img.onload=function()
-	{
-		if((bH-107)/img.height>=1 &&(bW-236)/img.width>=1)
-		{
-			document.getElementById("canvas_Big").width=bW-236;
-			document.getElementById("canvas_Big").height=bH-107;
-			context_Big.drawImage(img,Math.floor((bW-236-img.width)/2),Math.floor((bH-107-img.height)/2));
-		}
-		 else if((bH-107)/img.height>=1 &&(bW-236)/img.width<1)
-		{
-			var zoom=Math.floor((bW-236)/img.width*100)/100;
-			document.getElementById("canvas_Big").width=img.width*zoom;
-			document.getElementById("canvas_Big").height=bH-107;
-			context_Big.drawImage(img,0,(bH-107-img.height)/2,img.width*zoom,img.height*zoom);
-		}
-		else if((bH-107)/img.height<1 &&(bW-236)/img.width>=1)
-		{
-			var zoom=Math.floor((bH-107)/img.height*100)/100;
-			document.getElementById("canvas_Big").width=bW-236;
-			document.getElementById("canvas_Big").height=img.height*zoom;
-			context_Big.drawImage(img,((bW-236)-img.width)/2,0,img.width*zoom,img.height*zoom);
-		}
-		else if((bH-107)/img.height<1 &&(bW-236)/img.width<1)
-		{
-			if((bH-107)/img.height<=(bW-236)/img.width)
-			{
-				var zoom=Math.floor((bH-107)/img.height*100)/100;
-			
-			}
-			else
-			{
-				var zoom=Math.floor((bW-236)/img.width*100)/100;
-			}
-				document.getElementById("canvas_Big").width=bW-236;
-				document.getElementById("canvas_Big").height=bH-107;
-			context_Big.drawImage(img,Math.floor((bW-236-img.width*zoom)/2),Math.floor((bH-107-img.height*zoom)/2),Math.floor(img.width*zoom),Math.floor(img.height*zoom));
-		}
-		context_Big.save();
-	}
-	delete img;	
-	
-}
+</div><!-- /pageMain -->
 
-//图像反色
-function revert()
-{
-	var w=document.getElementById("canvas_Big").width;
-	var h=document.getElementById("canvas_Big").height;
-	var imagedata=context_Big.getImageData(0,0,w,h);
-			var imagedata1=context_Big.createImageData(w,h);
-			for (var j=0;j<h;j++)
-			{
-				for (var i=0;i<w;i++)
-				{
-					k=4*(w*j+i);
-					imagedata1.data[k+0]=255-imagedata.data[k+0];
-					imagedata1.data[k+1]=255-imagedata.data[k+1];
-					imagedata1.data[k+2]=255-imagedata.data[k+2];
-					imagedata1.data[k+3]=255;					
-				}			
-			}
-	context_Big.putImageData(imagedata1,0,0);
-}
-function Select()
-{
-	ifSelect=true;
-}
-
-function resetPic()
-{
-	context_Big.restore();
-}
-</script>
 </body>
 </html>
-            
-	

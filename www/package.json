@@ -1,0 +1,22 @@
+{
+  "name": "dwv",
+  "version": "0.5.0beta",
+  "homepage": "http://ivmartel.github.io/dwv/",
+  "description": "Dicom Web Viewer.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ivmartel/dwv.git"
+  },
+  "scripts": {
+    "test": "grunt test --verbose"
+  },
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-cli": "~0.1",
+    "grunt-contrib-qunit": "~0.2.2",
+    "grunt-contrib-jshint": "~0.6",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-yuidoc": "~0.5.0"
+  }
+}
